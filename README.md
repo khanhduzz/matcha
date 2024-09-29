@@ -1,4 +1,4 @@
-# Matcha - Microservices shopping system
+# Matcha 🍃 - Microservices shopping system
 A sample for learning how to build a shopping with microservices
 
 # Technologies
