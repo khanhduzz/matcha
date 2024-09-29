@@ -1,0 +1,8 @@
+package com.fjb.product.repository;
+
+import com.fjb.product.entity.Product;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface ProductRepository extends MongoRepository<Product, String> {
+
+}
