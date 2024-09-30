@@ -45,6 +45,22 @@ jobs:
       - name: Compile project
         run: mvn clean compile -f customer
 
+      - name: OWASP Dependency Check
+        if: ${{ env.FROM_ORIGINAL_REPOSITORY == 'true' }}
+        uses: dependency-check/Dependency-Check_Action@main
+        env:
+          JAVA_HOME: /opt/jdk
+        with:
+          project: 'matcha'
+          path: '.'
+          format: 'HTML'
+      - name: Upload OWASP Dependency Check results
+        if: ${{ env.FROM_ORIGINAL_REPOSITORY == 'true' }}
+        uses: actions/upload-artifact@master
+        with:
+          name: OWASP Dependency Check Report
+          path: ${{github.workspace}}/reports
+
   unit-tests:
     runs-on: ubuntu-latest
     name: Unit tests
@@ -113,7 +129,7 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}
           min-coverage-overall: 30
           min-coverage-changed-files: 20
-          title: 'Product Coverage Report'
+          title: 'Customer Coverage Report'
           update-comment: true
 
       - name: Upload coverage to Codecov
