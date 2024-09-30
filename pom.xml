@@ -225,14 +225,14 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/models/**</exclude>
-                        <exclude>**/dtos/**</exclude>
-                        <exclude>**/utils/**</exclude>
-                        <exclude>**/constraints/**</exclude>
-                        <exclude>**/controllers/**</exclude>
-                        <exclude>**/mappers/**</exclude>
-                        <exclude>**/repositories/**</exclude>
-                        <exclude>**/exceptions/**</exclude>
+                        <exclude>com/fjb/**/entity/**</exclude>
+                        <exclude>com/fjb/**/dto/**</exclude>
+                        <exclude>com/fjb/**/util/**</exclude>
+                        <exclude>com/fjb/**/constraint/**</exclude>
+                        <exclude>com/fjb/**/controller/**</exclude>
+                        <exclude>com/fjb/**/mapper/**</exclude>
+                        <exclude>com/fjb/**/repository/**</exclude>
+                        <exclude>com/fjb/**/exception/**</exclude>
                     </excludes>
                     <rules>
                         <rule>
