@@ -133,7 +133,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./product
           push: true
           file: Dockerfile
           platforms: linux/amd64
