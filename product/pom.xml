@@ -28,6 +28,10 @@
 	</scm>
 
 	<properties>
+		<sonar.organization>khanhduzz</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.projectKey>khanhduzz_matcha-product</sonar.projectKey>
+
 		<mongo.version>5.0.1</mongo.version>
 	</properties>
 
