@@ -45,22 +45,6 @@ jobs:
       - name: Compile project
         run: mvn clean compile -f customer
 
-      - name: OWASP Dependency Check
-        if: ${{ env.FROM_ORIGINAL_REPOSITORY == 'true' }}
-        uses: dependency-check/Dependency-Check_Action@main
-        env:
-          JAVA_HOME: /opt/jdk
-        with:
-          project: 'matcha'
-          path: '.'
-          format: 'HTML'
-      - name: Upload OWASP Dependency Check results
-        if: ${{ env.FROM_ORIGINAL_REPOSITORY == 'true' }}
-        uses: actions/upload-artifact@master
-        with:
-          name: OWASP Dependency Check Report
-          path: ${{github.workspace}}/reports
-
   unit-tests:
     runs-on: ubuntu-latest
     name: Unit tests
@@ -137,6 +121,22 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         continue-on-error: false
+
+      - name: OWASP Dependency Check
+        if: ${{ env.FROM_ORIGINAL_REPOSITORY == 'true' }}
+        uses: dependency-check/Dependency-Check_Action@main
+        env:
+          JAVA_HOME: /opt/jdk
+        with:
+          project: 'matcha'
+          path: '.'
+          format: 'HTML'
+      - name: Upload OWASP Dependency Check results
+        if: ${{ env.FROM_ORIGINAL_REPOSITORY == 'true' }}
+        uses: actions/upload-artifact@master
+        with:
+          name: OWASP Dependency Check Report
+          path: ${{github.workspace}}/reports
 
       - name: Log in to the Container registry
         if: ${{ github.ref == 'refs/heads/main' }}
