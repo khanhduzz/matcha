@@ -104,7 +104,7 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Building project
-        run: mvn package -f inventory
+        run: mvn package -f order
       - name: Add coverage report to PR
         uses: madrapps/jacoco-report@v1.6.1
         if: ${{ env.FROM_ORIGINAL_REPOSITORY == 'true' }}
