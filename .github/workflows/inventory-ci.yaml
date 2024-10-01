@@ -25,7 +25,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run maven checkstyle
-        run: mvn checkstyle:checkstyle -f product
+        run: mvn checkstyle:checkstyle -f inventory
   compile:
     runs-on: ubuntu-latest
     name: Compile project
@@ -43,7 +43,7 @@ jobs:
           cache: maven
 
       - name: Compile project
-        run: mvn clean compile -f product
+        run: mvn clean compile -f inventory
 
   unit-tests:
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
           cache: maven
 
       - name: Running unit tests
-        run: mvn test -f product jacoco:report
+        run: mvn test -f inventory jacoco:report
 
   build:
     runs-on: ubuntu-latest
@@ -82,7 +82,7 @@ jobs:
           cache: maven
 
       - name: Building project
-        run: mvn package -f product
+        run: mvn package -f inventory
 
   coverage:
     runs-on: ubuntu-latest
@@ -104,12 +104,12 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Building project
-        run: mvn package -f product
+        run: mvn package -f inventory
       - name: Add coverage report to PR
         uses: madrapps/jacoco-report@v1.6.1
         if: ${{ env.FROM_ORIGINAL_REPOSITORY == 'true' }}
         with:
-          paths: ${{github.workspace}}/product/target/site/jacoco/jacoco.xml
+          paths: ${{github.workspace}}/inventory/target/site/jacoco/jacoco.xml
           token: ${{secrets.GITHUB_TOKEN}}
           min-coverage-overall: 30
           min-coverage-changed-files: 20
@@ -149,11 +149,11 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: docker/build-push-action@v6
         with:
-          context: ./product
+          context: ./inventory
           push: true
-          file: ./product/Dockerfile
+          file: ./inventory/Dockerfile
           platforms: linux/amd64
-          tags: ghcr.io/${{ github.repository_owner }}/matcha-product:latest
+          tags: ghcr.io/${{ github.repository_owner }}/matcha-inventory:latest
 
   check:
     runs-on: ubuntu-latest
