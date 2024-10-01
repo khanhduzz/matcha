@@ -1,7 +1,7 @@
 # Matcha 🍃 - Microservices shopping system
 A sample for learning how to build a shopping with microservices
 
-[![product-ci](https://github.com/khanhduzz/matcha/actions/workflows/product-ci.yaml/badge.svg)](https://github.com/khanhduzz/matcha/actions/workflows/product-ci.yaml) [![product-ci](https://github.com/khanhduzz/matcha/actions/workflows/customer-ci.yaml/badge.svg)](https://github.com/khanhduzz/matcha/actions/workflows/customer-ci.yaml) [![product-ci](https://github.com/khanhduzz/matcha/actions/workflows/inventory-ci.yaml/badge.svg)](https://github.com/khanhduzz/matcha/actions/workflows/inventory-ci.yaml)
+[![product-ci](https://github.com/khanhduzz/matcha/actions/workflows/product-ci.yaml/badge.svg)](https://github.com/khanhduzz/matcha/actions/workflows/product-ci.yaml) [![product-ci](https://github.com/khanhduzz/matcha/actions/workflows/customer-ci.yaml/badge.svg)](https://github.com/khanhduzz/matcha/actions/workflows/customer-ci.yaml) [![product-ci](https://github.com/khanhduzz/matcha/actions/workflows/inventory-ci.yaml/badge.svg)](https://github.com/khanhduzz/matcha/actions/workflows/inventory-ci.yaml) [![product-ci](https://github.com/khanhduzz/matcha/actions/workflows/order-ci.yaml/badge.svg)](https://github.com/khanhduzz/matcha/actions/workflows/order-ci.yaml)
 
 [![codecov](https://codecov.io/github/khanhduzz/matcha/graph/badge.svg?token=ESZ4FX0CF8)](https://codecov.io/github/khanhduzz/matcha)
 
