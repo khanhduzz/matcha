@@ -55,6 +55,7 @@
         <checkstyle.version>10.17.0</checkstyle.version>
         <jacoco.version>0.8.12</jacoco.version>
         <jacoco.minimumInstructionCoverage>0.00</jacoco.minimumInstructionCoverage>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -84,6 +85,13 @@
                 <artifactId>instancio-junit</artifactId>
                 <version>${instancio-junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
