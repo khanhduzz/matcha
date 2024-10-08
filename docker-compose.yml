@@ -18,6 +18,8 @@ services:
       - ./identity/themes/matcha/theme:/opt/keycloak/themes
     networks:
       - matcha-network
+    ports:
+      - "8080:80"
 
   postgres:
     image: debezium/postgres:15-alpine
@@ -37,6 +39,10 @@ services:
       - matcha-network
 
 networks:
-  yas-network:
+  matcha-network:
     driver: bridge
     name: matcha-network
+
+volumes:
+  postgres:
+  pgadmin:
