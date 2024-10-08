@@ -798,7 +798,7 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "localhost:8181/*"
+        "http://localhost:8181/*"
       ],
       "webOrigins": [
         ""
@@ -851,18 +851,18 @@
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "localhost:8084/*",
-        "localhost:8083/*",
-        "localhost:8082/*",
-        "localhost:8081/*",
-        "localhost:8090/*"
+        "http://localhost:8081/*",
+        "http://localhost:8083/*",
+        "http://localhost:8082/*",
+        "http://localhost:8090/*",
+        "http://localhost:8084/*"
       ],
       "webOrigins": [
-        "localhost:8090",
-        "localhost:8082",
-        "localhost:8081",
-        "localhost:8084",
-        "localhost:8083"
+        "http://localhost:8084",
+        "http://localhost:8083",
+        "http://localhost:8090",
+        "http://localhost:8082",
+        "http://localhost:8081"
       ],
       "notBefore": 0,
       "bearerOnly": false,

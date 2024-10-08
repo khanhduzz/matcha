@@ -13,12 +13,12 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://identity/realms/Matcha
+            issuer-uri: http://localhost:8080/realms/Matcha
         registration:
           api-client:
             provider: keycloak
-            client-id: backoffice-bff
-            client-secret: u03jjXKol43F9UBn7HEgpqadBbzuHqjW #gitleaks:allow
+            client-id: sell-bff
+            client-secret: L1ISNRVOUfQONER3aTs1OPaXGg0EZMTe #gitleaks:allow
             scope: openid, profile, email, roles
 management:
   tracing:
@@ -44,10 +44,10 @@ spring:
     gateway:
       routes:
         # Changes for your local development should not be committed
-        - id: api_servicename_local
-          uri: http://localhost:8085
+        - id: api_product_local
+          uri: http://localhost:8081
           predicates:
-            - Path=/api/servicename/**
+            - Path=/api/product/**
           filters:
             - RewritePath=/api/(?<segment>.*), /$\{segment}
             - TokenRelay=
