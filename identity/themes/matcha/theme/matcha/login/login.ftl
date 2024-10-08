@@ -26,7 +26,7 @@
     
         <div class="box-container">
             <div>
-                <p class="application-name">Welcome to matcha store</p>
+                <p class="application-name">Welcome to matcha</p>
             </div>
         <#if realm.password>
             <div>
