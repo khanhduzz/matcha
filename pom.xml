@@ -56,6 +56,7 @@
         <jacoco.version>0.8.12</jacoco.version>
         <jacoco.minimumInstructionCoverage>0.00</jacoco.minimumInstructionCoverage>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <dotenv-version>4.0.0</dotenv-version>
     </properties>
 
     <dependencyManagement>
@@ -92,6 +93,11 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>me.paulschwarz</groupId>
+                <artifactId>spring-dotenv</artifactId>
+                <version>${dotenv-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
