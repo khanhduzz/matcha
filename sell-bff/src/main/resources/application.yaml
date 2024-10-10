@@ -44,10 +44,17 @@ spring:
     gateway:
       routes:
         # Changes for your local development should not be committed
-        - id: api_product_local
+        - id: product
           uri: http://localhost:8081
           predicates:
             - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+        - id: localhost
+          uri: http://localhost:80
+          predicates:
+            - Path=/api/**
           filters:
             - RewritePath=/api/(?<segment>.*), /$\{segment}
             - TokenRelay=
