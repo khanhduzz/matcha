@@ -37,7 +37,7 @@ public class SecurityConfig {
         return http
             .authorizeExchange(auth -> auth
                 .pathMatchers("/health").permitAll()
-//                .anyExchange().hasAnyRole("ADMIN"))
+                // .anyExchange().hasAnyRole("ADMIN"))
                 .anyExchange().permitAll())
             .oauth2Login(Customizer.withDefaults())
             .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
