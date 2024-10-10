@@ -1,29 +1,18 @@
 server {
-  server_name 127.0.0.11;
-
-  # Docker DNS
-  resolver 127.0.0.11;
-
-  location /swagger-ui/ {
-    proxy_pass http://swagger-ui:8090;
-  }
-  location /product/ {
-    proxy_pass http://product;
-  }
 }
 
-server {
-  server_name sell;
-  location / {
-    proxy_pass http://sell;
-  }
-}
+#server {
+#  server_name sell;
+#  location / {
+#    proxy_pass http://localhost:8181;
+#  }
+#}
 
 server {
   server_name identity;
   large_client_header_buffers 8 32k;
   location / {
-    proxy_pass http://identity;
+    proxy_pass http://keycloak:80;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-Proto $scheme;
