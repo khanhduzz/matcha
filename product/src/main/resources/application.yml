@@ -39,5 +39,5 @@ server:
   servlet:
     context-path: /product
 cors:
-  allowed: *
+  allowed: "*"
 
