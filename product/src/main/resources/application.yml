@@ -2,9 +2,9 @@ spring:
   application:
     name: product
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATA_USERNAME}
-    password: ${SPRING_DATA_PASSWORD}
+    url: ${PRODUCT_DATASOURCE_URL}
+    username: ${PRODUCT_DATA_USERNAME}
+    password: ${PRODUCT_DATA_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -17,9 +17,6 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
-
-  dotenv:
-    file: ../.env
 
 server:
   port: 8081
