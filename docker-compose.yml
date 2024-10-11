@@ -1,16 +1,16 @@
 version: "3.9"
 
 services:
-  nginx:
-    image: nginx:1.25.3
-    restart: unless-stopped
-    volumes:
-      - ./nginx/templates:/etc/nginx/templates
-      - ./nginx/configuration/custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf
-    ports:
-      - "80:80"
-    networks:
-      - matcha-network
+#  nginx:
+#    image: nginx:1.25.3
+#    restart: unless-stopped
+#    volumes:
+#      - ./nginx/templates:/etc/nginx/templates
+#      - ./nginx/configuration/custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf
+#    ports:
+#      - "80:80"
+#    networks:
+#      - matcha-network
 
   keycloak:
     image: quay.io/keycloak/keycloak:21.0.2
@@ -29,6 +29,8 @@ services:
       - ./identity/themes/matcha/theme:/opt/keycloak/themes
     networks:
       - matcha-network
+    ports:
+      - "8080:80"
 
   postgres:
     image: debezium/postgres:15-alpine
@@ -46,6 +48,18 @@ services:
       - POSTGRES_PASSWORD
     networks:
       - matcha-network
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui:v4.16.0
+    environment:
+      - BASE_URL=/swagger-ui
+      - URLS
+      - OAUTH_CLIENT_ID=swagger
+      - OAUTH_USE_PKCE=true
+    networks:
+      - matcha-network
+    ports:
+      - "8090:8080"
 
 networks:
   matcha-network:

@@ -17,6 +17,7 @@ public class ProductService {
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
 
+    @Transactional
     public ProductResponseDto createProduct(ProductCreateDto productCreateDto) {
         Product product = productMapper.toProduct(productCreateDto);
         return productMapper.toProductResponseDto(productRepository.save(product));
