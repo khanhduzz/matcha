@@ -24,23 +24,5 @@ A sample for learning how to build a shopping with microservices
 
 # Architecture
 
-
-# Database Modeling
-
-# Setting Up and Running at Local
-
-## Configuration
-
-## Run
-
-# References
-
-## Documentation & Tools
-
-
-2. **SonarQube Documentation**:
-   - [SonarQube Documentation](https://docs.sonarqube.org/latest/)
-
-3. **JPA & Hibernate Documentation**:
-   - [Java Persistence API (JPA) Documentation](https://www.oracle.com/java/technologies/persistence-jsp.html)
-   - [Hibernate ORM Documentation](https://hibernate.org/orm/documentation/)
+# Setting and running at local:
+[How to run Matcha 🍃](https://github.com/khanhduzz/matcha/wiki/How-to-run-Matcha-%F0%9F%8D%83)
