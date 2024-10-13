@@ -26,3 +26,4 @@ A sample for learning how to build a shopping with microservices
 
 # Setting and running at local:
 [How to run Matcha 🍃](https://github.com/khanhduzz/matcha/wiki/How-to-run-Matcha-%F0%9F%8D%83)
+[How to active Checkstyle 🍃](https://github.com/khanhduzz/matcha/wiki/Checkstyle-for-Matcha-%F0%9F%8D%83)
