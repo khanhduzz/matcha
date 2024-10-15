@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -18,6 +19,7 @@ public class ProductService {
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
 
+    @Transactional
     public ProductResponseDto createProduct(ProductCreateDto productCreateDto) {
         Product product = productMapper.toProduct(productCreateDto);
         product = productRepository.save(product);

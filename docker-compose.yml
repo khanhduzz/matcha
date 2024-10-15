@@ -1,0 +1,71 @@
+version: "3.9"
+
+services:
+#  nginx:
+#    image: nginx:1.25.3
+#    restart: unless-stopped
+#    volumes:
+#      - ./nginx/templates:/etc/nginx/templates
+#      - ./nginx/configuration/custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf
+#    ports:
+#      - "80:80"
+#    networks:
+#      - matcha-network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.0.2
+    command: [ 'start-dev --import-realm' ]
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_PROXY: passthrough
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_HTTP_PORT: 80
+    volumes:
+      - ./identity/realm-export.json:/opt/keycloak/data/import/realm-export.json
+      - ./identity/themes/matcha/theme:/opt/keycloak/themes
+    networks:
+      - matcha-network
+    ports:
+      - "8080:80"
+
+  postgres:
+    image: debezium/postgres:15-alpine
+    build: ./docker/postgres
+    hostname: ${POSTGRES_HOST}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - ./docker/postgres/postgresql.conf.sample:/usr/share/postgresql/postgresql.conf.sample
+      - ./postgres_init.sql:/docker-entrypoint-initdb.d/postgres_init.sql
+      - postgres:/var/lib/postgresql/data
+    command: postgres -c 'max_connections=500'
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    networks:
+      - matcha-network
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui:v4.16.0
+    environment:
+      - BASE_URL=/swagger-ui
+      - URLS
+      - OAUTH_CLIENT_ID=swagger
+      - OAUTH_USE_PKCE=true
+    networks:
+      - matcha-network
+    ports:
+      - "8090:8080"
+
+networks:
+  matcha-network:
+    driver: bridge
+    name: matcha-network
+
+volumes:
+  postgres:
+  pgadmin:

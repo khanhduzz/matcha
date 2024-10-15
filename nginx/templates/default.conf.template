@@ -1,0 +1,26 @@
+server {
+}
+
+#server {
+#  server_name sell;
+#  location / {
+#    proxy_pass http://localhost:8181;
+#  }
+#}
+
+server {
+  server_name identity;
+  large_client_header_buffers 8 32k;
+  location / {
+    proxy_pass http://keycloak:80;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    # Workaround to void CORS error from Reactjs
+    if ($uri ~ "^(.*)/(protocol/openid-connect/auth|login/oauth2/code)(.*)") {
+    	add_header Access-Control-Allow-Origin *;
+    }
+  }
+}
