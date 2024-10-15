@@ -1,11 +1,12 @@
 package com.fjb.product.exception;
 
+
 import com.fjb.product.utils.MessagesUtils;
 
-public class ErrorCreatingEntry extends RuntimeException {
+public class NotFoundException extends RuntimeException {
     private final String message;
 
-    public ErrorCreatingEntry(String errorCode, Object... var2) {
+    public NotFoundException(String errorCode, Object... var2) {
         this.message = MessagesUtils.getMessage(errorCode, var2);
     }
 

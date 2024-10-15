@@ -2,11 +2,8 @@ package com.fjb.product.controller;
 
 import com.fjb.product.dto.request.ProductCreateDto;
 import com.fjb.product.dto.response.ProductResponseDto;
-import com.fjb.product.exception.ErrorCreatingEntry;
-import com.fjb.product.exception.ProductNotFoundException;
 import com.fjb.product.service.ProductService;
 import jakarta.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
@@ -31,86 +27,33 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody ProductCreateDto productCreateDto) {
-        try {
-            ProductResponseDto productResponseDto = productService.createProduct(productCreateDto);
-            if (productResponseDto == null) {
-                throw new ErrorCreatingEntry("Could not create entry");
-            } else {
-                return new ResponseEntity<>(productResponseDto, HttpStatus.CREATED);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<ProductResponseDto> createProduct(@Valid @RequestBody ProductCreateDto productCreateDto) {
+        ProductResponseDto productResponseDto = productService.createProduct(productCreateDto);
+        return new ResponseEntity<>(productResponseDto, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
-        try {
-            List<ProductResponseDto> list = productService.getAllProducts();
-            if (list.isEmpty()) {
-                throw new ProductNotFoundException("No Entries found!");
-            } else {
-                return new ResponseEntity<>(list, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        List<ProductResponseDto> list = productService.getAllProducts();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id) {
-        try {
-            ProductResponseDto productResponseDto = productService.getProduct(id);
-            if (productResponseDto == null) {
-                throw new ProductNotFoundException("No Entry found");
-            }
-            return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        ProductResponseDto productResponseDto = productService.getProduct(id);
+        return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDto> updateProduct(
-            @PathVariable Long id, @Valid @RequestBody ProductCreateDto newProductCreateDto
-    ) {
-        try {
-            ProductResponseDto existingProduct = productService.getProduct(id);
-            if (existingProduct != null) {
-                String newName = newProductCreateDto.getName();
-                String newDescription = newProductCreateDto.getDescription();
-                BigDecimal newPrice = newProductCreateDto.getPrice();
-
-                existingProduct.setName(
-                        newName != null && !newName.isEmpty()
-                                ? newName : existingProduct.getName()
-                );
-                existingProduct.setDescription(
-                        newDescription != null && !newDescription.isEmpty()
-                                ? newDescription : existingProduct.getDescription()
-                );
-                existingProduct.setPrice(
-                        newPrice != null
-                                ? newPrice : existingProduct.getPrice()
-                );
-                ProductResponseDto updated = productService.saveExistingProduct(existingProduct);
-                return new ResponseEntity<>(updated, HttpStatus.CREATED);
-            } else {
-                throw new ProductNotFoundException("Entry not found");
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+            @PathVariable Long id, @Valid @RequestBody ProductCreateDto newProductCreateDto) {
+        ProductResponseDto updatedProduct = productService.updateProduct(id, newProductCreateDto);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-        try {
-            productService.deleteProductById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        productService.deleteProductById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

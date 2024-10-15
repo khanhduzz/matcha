@@ -1,11 +1,12 @@
 package com.fjb.product.exception;
 
+
 import com.fjb.product.utils.MessagesUtils;
 
-public class ErrorCreatingEntry extends RuntimeException {
+public class ForbiddenException extends RuntimeException {
     private final String message;
 
-    public ErrorCreatingEntry(String errorCode, Object... var2) {
+    public ForbiddenException(String errorCode, Object... var2) {
         this.message = MessagesUtils.getMessage(errorCode, var2);
     }
 
@@ -13,4 +14,5 @@ public class ErrorCreatingEntry extends RuntimeException {
     public String getMessage() {
         return message;
     }
+
 }
