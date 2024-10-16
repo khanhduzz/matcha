@@ -33,6 +33,7 @@
         <module>inventory</module>
         <module>order</module>
         <module>product</module>
+        <module>sell-bff</module>
     </modules>
 
     <properties>
