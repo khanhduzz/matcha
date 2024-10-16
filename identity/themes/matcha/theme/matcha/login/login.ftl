@@ -24,9 +24,9 @@
         </div>
     <#elseif section = "form">
     
-        <div class="box-container">
+        <div class="box-container d-flex justify-content-center align-item-center">
             <div>
-                <p class="application-name">Welcome to matcha</p>
+                <p class="application-name">Welcome to Matcha Store</p>
             </div>
         <#if realm.password>
             <div>
@@ -46,7 +46,7 @@
             </div>
         </#if>
         <div>
-            <p class="copyright">&copy; copyright - matcha ${.now?string('yyyy')}</p>
+            <p class="copyright">&copy; Copyright - Matcha ${.now?string('yyyy')}</p>
         </div>
     </#if>
 </@layout.registrationLayout>
