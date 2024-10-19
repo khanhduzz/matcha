@@ -33,7 +33,7 @@ public class ProductService {
     public List<ProductResponseDto> getAllProducts() {
         List<Product> list = productRepository.findAllByOrderByIdAsc();
         if (list.isEmpty()) {
-            throw new NotFoundException("No products found");
+            return new ArrayList<>();
         }
         List<ProductResponseDto> responseList = new ArrayList<>();
         list.forEach(product -> responseList.add(productMapper.toProductResponseDto(product)));
@@ -46,24 +46,11 @@ public class ProductService {
         return productMapper.toProductResponseDto(product);
     }
 
-    public ProductResponseDto updateProduct(Long id, ProductCreateDto newProductCreateDto) {
-        Product existingProduct = productRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Product not found with id: " + id));
-
-        existingProduct.setName(
-                newProductCreateDto.getName() != null
-                        ? newProductCreateDto.getName() : existingProduct.getName()
-        );
-        existingProduct.setDescription(
-                newProductCreateDto.getDescription() != null
-                        ? newProductCreateDto.getDescription() : existingProduct.getDescription()
-        );
-        existingProduct.setPrice(
-                newProductCreateDto.getPrice() != null
-                        ? newProductCreateDto.getPrice() : existingProduct.getPrice()
-        );
-
-        return productMapper.toProductResponseDto(productRepository.save(existingProduct));
+    public ProductResponseDto updateProduct(Long id, ProductCreateDto productCreateDto) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Product not found"));
+        product = productMapper.updateProduct(product, productCreateDto);
+        return productMapper.toProductResponseDto(product);
     }
 
     public void deleteProductById(Long id) {
