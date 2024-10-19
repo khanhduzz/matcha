@@ -20,6 +20,13 @@ import org.springframework.web.context.request.WebRequest;
 public class ApiExceptionHandler {
     private static final String ERROR_LOG_FORMAT = "Error: URI: {}, ErrorCode: {}, Message: {}";
 
+    @ExceptionHandler(ErrorCreatingEntry.class)
+    public ResponseEntity<ErrorVm> handleErrorCreatingEntry(ErrorCreatingEntry ex, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        String message = ex.getMessage();
+        return buildErrorResponse(status, message, null, ex, request, status.value());
+    }
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorVm> handleNotFoundException(NotFoundException ex, WebRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
