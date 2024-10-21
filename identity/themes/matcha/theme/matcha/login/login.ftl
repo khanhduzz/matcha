@@ -19,11 +19,11 @@
                 }
             }
         </script>
+            <!--
             <div class="logomatcha">
-           <img class="logo" src="${url.resourcesPath}/img/matcha-logo.png" alt="matcha">
-        </div>
+                <img class="logo" src="${url.resourcesPath}/img/matcha-logo.png" alt="matcha">
+            </div> -->
     <#elseif section = "form">
-    
         <div class="box-container d-flex justify-content-center align-item-center">
             <div>
                 <p class="application-name">Welcome to Matcha Store</p>

@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: inventory
+  datasource:
+    url: ${INVENTORY_DATASOURCE_URL}
+    username: ${INVENTORY_DATA_USERNAME}
+    password: ${INVENTORY_DATA_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/Matcha
+springdoc:
+  oauthflow:
+    authorization-url: http://localhost:8080/realms/Matcha/protocol/openid-connect/auth
+    token-url: http://localhost:8080/realms/Matcha/protocol/openid-connect/token
+  swagger-ui:
+    oauth:
+      client-id: swagger
+      use-pkce-with-authorization-code-grant: true
+  packagesToScan: com.fjb.inventory
+  path: /swagger-ui
+
+server:
+  port: 8082
+  servlet:
+    context-path: /inventory
+cors:
+  allowed: "*"
+
