@@ -52,6 +52,13 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*), /$\{segment}
             - TokenRelay=
+        - id: inventory
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/inventory/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
         - id: localhost
           uri: http://localhost:80
           predicates:
