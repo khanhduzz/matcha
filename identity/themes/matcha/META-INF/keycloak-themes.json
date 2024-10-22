@@ -1,0 +1,6 @@
+{
+  "themes": [{
+    "name" : "matcha",
+    "types": [ "login" ]
+  }]
+}

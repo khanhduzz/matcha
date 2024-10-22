@@ -1,0 +1,68 @@
+server:
+  port: 8181
+spring:
+  application:
+    name: sell-bff
+  threads:
+    virtual:
+      enabled: true
+  profiles:
+    active: dev
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/Matcha
+        registration:
+          api-client:
+            provider: keycloak
+            client-id: sell-bff
+            client-secret: L1ISNRVOUfQONER3aTs1OPaXGg0EZMTe #gitleaks:allow
+            scope: openid, profile, email, roles
+management:
+  tracing:
+    sampling:
+      probability: "1.0"
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    tags:
+      application: ${spring.application.name}
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+    org.springframework: DEBUG
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  cloud:
+    gateway:
+      routes:
+        # Changes for your local development should not be committed
+        - id: product
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+        - id: inventory
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/inventory/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
+        - id: localhost
+          uri: http://localhost:80
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+            - TokenRelay=
