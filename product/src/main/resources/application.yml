@@ -34,6 +34,10 @@ springdoc:
   packagesToScan: com.fjb.product
   path: /swagger-ui
 
+http:
+  feignUrl:
+    inventory: ${INVENTORY_URL:http://localhost:8082/inventory}
+
 server:
   port: 8081
   servlet:
