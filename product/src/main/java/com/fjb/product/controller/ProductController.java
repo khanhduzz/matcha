@@ -2,6 +2,8 @@ package com.fjb.product.controller;
 
 import com.fjb.product.dto.request.ProductCreateDto;
 import com.fjb.product.dto.response.ProductResponseDto;
+import com.fjb.product.dto.response.warehouse.WarehouseApiService;
+import com.fjb.product.dto.response.warehouse.WarehouseResponseDto;
 import com.fjb.product.service.ProductService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
     private final ProductService productService;
+    private final WarehouseApiService warehouseApiService;
 
     @PostMapping
     public ResponseEntity<ProductResponseDto> createProduct(@Valid @RequestBody ProductCreateDto productCreateDto) {
@@ -53,5 +56,10 @@ public class ProductController {
     public ResponseEntity.BodyBuilder deleteProduct(@PathVariable Long id) {
         productService.deleteProductById(id);
         return ResponseEntity.status(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/warehouse/{id}")
+    public ResponseEntity<WarehouseResponseDto> getWarehouseById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(warehouseApiService.getWareHouseById(id));
     }
 }
